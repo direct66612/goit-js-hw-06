@@ -7,17 +7,21 @@ const input = document.querySelector("#controls input");
 const btnCreate = document.querySelector("button[data-create]");
 const btnDestroy = document.querySelector("button[data-destroy]");
 const boxes = document.querySelector("#boxes");
-btnCreate.addEventListener("click", createBox);
+btnCreate.addEventListener("click", () => {
+  let boxPush = createBox(input.value);
+  boxes.append(...boxPush);
+});
 btnDestroy.addEventListener("click", destroyBoxes);
 function createBox(amount) {
-  amount = input.value;
+  const array = [];
   for (let i = 0; i < amount; i++) {
     let div = document.createElement("div");
     div.style.width = 30 + 10 * i + "px";
-    div.style.height = "30px";
+    div.style.height = 30 + 10 * i + "px";
     div.style.backgroundColor = getRandomHexColor();
-    boxes.append(div);
+    array.push(div);
   }
+  return array;
 }
 function destroyBoxes() {
   boxes.innerHTML = "";
